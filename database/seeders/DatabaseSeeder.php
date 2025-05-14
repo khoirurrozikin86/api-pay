@@ -21,8 +21,31 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([
-            ProductSeeder::class,
-        ]);
+        // $this->call([
+        //     ProductSeeder::class,
+        // ]);
+
+    //       User::create([
+    //     'name' => 'Admin',
+    //     'email' => 'admin@example.com',
+    //     'password' => bcrypt('password'),
+    //     'role' => 'admin',
+    // ]);
+
+    // User::create([
+    //     'name' => 'User',
+    //     'email' => 'user@example.com',
+    //     'password' => bcrypt('password'),
+    //     'role' => 'user',
+    // ]);
+
+
+       $this->call([
+        PaketSeeder::class,
+    ]);
+
+
+
+
     }
 }
