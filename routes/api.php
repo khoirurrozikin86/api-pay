@@ -36,7 +36,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //tagihan
     Route::post('/tagihan/bayar', [TagihanController::class, 'bayarTagihan']);
-    Route::get('/tagihan/belum-lunas/{id_pelanggan}', [TagihanController::class, 'getBelumLunasByPelanggan']);
+    // Route::get('/tagihan/belum-lunas/{id_pelanggan}', [TagihanController::class, 'getBelumLunasByPelanggan']);
+
+
+    Route::get('/tagihan/belum-lunas-pelanggan', [TagihanController::class, 'getBelumLunasByPelanggan']);
 
     Route::get('/penghasilan', [TagihanController::class, 'getPenghasilanByTanggal']);
 

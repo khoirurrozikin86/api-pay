@@ -364,7 +364,7 @@ class TagihanController extends Controller
             ]
         ]);
     }
-    public function getBelumLunasByPelanggan($id_pelanggan)
+    public function getBelumLunasByPelangganx($id_pelanggan)
     {
         // $bulanNow = now()->format('m');
 
@@ -379,6 +379,34 @@ class TagihanController extends Controller
             'data' => $tagihan
         ]);
     }
+
+    public function getBelumLunasByPelanggan(Request $request)
+    {
+        $idPelanggan = $request->query('id_pelanggan');
+        $namaPelanggan = $request->query('nama');
+
+        if ($idPelanggan) {
+            $tagihan = Tagihan::with(['pelanggan.paket', 'pelanggan.server'])
+                ->where('id_pelanggan', $idPelanggan)
+                ->where('status', 'belum')
+                ->get();
+        } elseif ($namaPelanggan) {
+            $tagihan = Tagihan::with(['pelanggan.paket', 'pelanggan.server'])
+                ->whereHas('pelanggan', function ($query) use ($namaPelanggan) {
+                    $query->where('nama', 'like', "%" . $namaPelanggan . "%");
+                })
+                ->where('status', 'belum')
+                ->get();
+        } else {
+            return response()->json(['error' => 'ID Pelanggan or Nama is required'], 400);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $tagihan
+        ]);
+    }
+
 
     public function bayarTagihan(Request $request)
     {
